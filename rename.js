@@ -6,14 +6,6 @@ var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
 var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
 var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
 
-// fs.rename('./teste.js', './teste-renamed.js', (err) => {
-//     if (err) throw err;
-//     console.log('renamed complete');
-// });
-// fs.stat('./teste-renamed.js', (err, stats) => {
-//     if (err) throw err;
-//     console.log(`stats: ${JSON.stringify(stats)}`);
-// });
 
 var fileName = '',
     fileExtension = '',

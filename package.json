@@ -1,0 +1,25 @@
+{
+  "name": "rename-file",
+  "version": "0.0.1",
+  "description": "(not ready to use) Rename files with version tag to optimize cache",
+  "main": "rename.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iondrimba/rename-me.git"
+  },
+  "keywords": [
+    "npm",
+    "cache",
+    "rename",
+    "spa"
+  ],
+  "author": "Ion D. Filho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iondrimba/rename-me/issues"
+  },
+  "homepage": "https://github.com/iondrimba/rename-me#readme"
+}
