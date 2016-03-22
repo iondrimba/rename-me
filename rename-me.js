@@ -1,13 +1,13 @@
 'use-strict';
-//node >  rename-me file version outputpath
-//demo > node rename-me src/app.js 1.1.1 public/
+//node >  rename-me file version outputpath index.html
+//demo > node rename-me src/app.js 1.1.1 public/ public/index.html
 //output > public/app.1.1.1.js
 
 var fs = require('fs');
 var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
 var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
 var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
-var indexFile = process.argv[5]; //OUTPUT PATH ex: Desktop/'
+var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
 
 var fileName = '',
     fileExtension = '',
