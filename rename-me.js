@@ -8,6 +8,7 @@ var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
 var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
 var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
 var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
+var semver = require('semver');
 
 var fileName = '',
     fileExtension = '',
@@ -19,7 +20,7 @@ var fileName = '',
 var renameMe = function (options) {
 
     filePath = options.filePath;
-    version = options.version;
+    version = semver.inc(options.version, 'patch');
     outputfolder = options.outputfolder;
     indexFile = options.indexFile;
 
@@ -27,10 +28,6 @@ var renameMe = function (options) {
         setup();
         rename();
         replaceReferences(fileRenamed);
-        fs.stat(finalOutputPath, (err, stats) => {
-            if (err) throw err;
-            console.log('sucess:', `stats: ${JSON.stringify(stats)}`);
-        });
     } catch (ex) {
         console.log('ex:', ex.message);
     }
