@@ -21,11 +21,26 @@ var fileName = '',
     fileRenamed = '',
     finalOutputPath = '';
 
+try {
+    setup();
+    rename();
+    fs.stat(finalOutputPath, (err, stats) => {
+        if (err) throw err;
+        console.log('sucess:', `stats: ${JSON.stringify(stats)}`);
+    });
+} catch (ex) {
+    console.log('ex:', ex.message());
+}
+
 function setup() {
     fileName = removePathFromFileName(filePath);
     fileExtension = getFileExtension(fileName);
     tempNameNoExtension = getFileNameWithoutExtension(fileName);
-    fileRenamed = concatNamedVersion({ name: tempNameNoExtension, version: version, extension: fileExtension });
+    fileRenamed = concatNamedVersion({
+        name: tempNameNoExtension,
+        version: version,
+        extension: fileExtension
+    });
     finalOutputPath = outputfolder + fileRenamed;
 }
 
