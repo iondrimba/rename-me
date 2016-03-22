@@ -1,4 +1,5 @@
-//node >  rename file version
+//node >  rename file version outputpath
+//demo > node rename src/app.js public/
 
 var fs = require('fs');
 var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
@@ -14,13 +15,20 @@ var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
 //     console.log(`stats: ${JSON.stringify(stats)}`);
 // });
 
-//file
+var fileName = '',
+    fileExtension = '',
+    tempNameNoExtension = '',
+    fileRenamed = '',
+    finalOutputPath = '';
 
-var fileName = removePathFromFileName(filePath),
-    fileExtension = getFileExtension(fileName),
-    tempNameNoExtension = getFileNameWithoutExtension(fileName),
-    fileRemamed = tempNameNoExtension + version + fileExtension; // hello. + version + .js
+fileName = removePathFromFileName(filePath);
+fileExtension = getFileExtension(fileName);
+tempNameNoExtension = getFileNameWithoutExtension(fileName);
+fileRenamed = concatNamedVersion({ name: tempNameNoExtension, version: version, extension: fileExtension });
+finalOutputPath = outputfolder + fileRenamed;
 
+
+fs.createReadStream(filePath).pipe(fs.createWriteStream(finalOutputPath));
 
 function removePathFromFileName(input) {
     var output = input;
@@ -49,14 +57,10 @@ function getFileNameWithoutExtension(input) {
     return output;
 }
 
+function concatNamedVersion(options) {
+    var output = '';
 
+    output = options.name + options.version + options.extension;
 
-
-
-// var outputFile = output +
-
-// fs.createReadStream(file).pipe(fs.createWriteStream(outputFile));
-
-// fs.stat('./teste111-renamed.js', (err, stats) => {
-//     if (err) throw err;
-//     //console.log(`stats: ${JSON.stringify(stats)
+    return output;
+}
