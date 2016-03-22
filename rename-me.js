@@ -1,5 +1,5 @@
-//node >  rename file version outputpath
-//demo > node rename src/app.js public/
+//node >  rename-me file version outputpath
+//demo > node rename-me src/app.js public/
 
 var fs = require('fs');
 var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
