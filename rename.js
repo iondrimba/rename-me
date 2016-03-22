@@ -21,14 +21,18 @@ var fileName = '',
     fileRenamed = '',
     finalOutputPath = '';
 
-fileName = removePathFromFileName(filePath);
-fileExtension = getFileExtension(fileName);
-tempNameNoExtension = getFileNameWithoutExtension(fileName);
-fileRenamed = concatNamedVersion({ name: tempNameNoExtension, version: version, extension: fileExtension });
-finalOutputPath = outputfolder + fileRenamed;
+function setup() {
+    fileName = removePathFromFileName(filePath);
+    fileExtension = getFileExtension(fileName);
+    tempNameNoExtension = getFileNameWithoutExtension(fileName);
+    fileRenamed = concatNamedVersion({ name: tempNameNoExtension, version: version, extension: fileExtension });
+    finalOutputPath = outputfolder + fileRenamed;
+}
 
 
-fs.createReadStream(filePath).pipe(fs.createWriteStream(finalOutputPath));
+function rename() {
+    fs.createReadStream(filePath).pipe(fs.createWriteStream(finalOutputPath));
+};
 
 function removePathFromFileName(input) {
     var output = input;
@@ -37,7 +41,7 @@ function removePathFromFileName(input) {
     output = input.replace(/\w+\//g, '');
 
     return output;
-}
+};
 
 function getFileExtension(input) {
     var output = input;
@@ -46,7 +50,7 @@ function getFileExtension(input) {
     output = input.replace(/[0-9a-z-0-1]{1,}/, '');
 
     return output;
-}
+};
 
 function getFileNameWithoutExtension(input) {
     var output = input;
@@ -55,7 +59,7 @@ function getFileNameWithoutExtension(input) {
     output = input.replace(/[0-9a-z]+$/, '');
 
     return output;
-}
+};
 
 function concatNamedVersion(options) {
     var output = '';
@@ -63,4 +67,4 @@ function concatNamedVersion(options) {
     output = options.name + options.version + options.extension;
 
     return output;
-}
+};
