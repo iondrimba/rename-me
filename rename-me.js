@@ -119,7 +119,7 @@ var renameMe = function(options) {
 }
 
 //execute if called manually via terminal
-if (process.argv.length) {
+if (process.argv.length > 2) {
     var options = {};    
     options.filePath = filePath.split(',');;
     options.version = version;
