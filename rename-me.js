@@ -18,9 +18,9 @@ var fileName = [],
 
 var renameMe = function(options) {
 
-    filePath = options.filePath.split(',');
+    filePath = options.filePath;
     version = options.version;
-    outputfolder = options.outputfolder.split(',');
+    outputfolder = options.outputfolder;
     indexFile = options.indexFile;
 
     try {
@@ -119,11 +119,11 @@ var renameMe = function(options) {
 }
 
 //execute if called manually via terminal
-if (process.argv[2]) {
-    var options = {};
-    options.filePath = filePath;
+if (process.argv.length) {
+    var options = {};    
+    options.filePath = filePath.split(',');;
     options.version = version;
-    options.outputfolder = outputfolder;
+    options.outputfolder = outputfolder.split(',');;
     options.indexFile = indexFile;
     renameMe(options);
 }
