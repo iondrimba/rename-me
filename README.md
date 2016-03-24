@@ -1,6 +1,7 @@
 # rename-me
 Rename files with version tag to optimize cache
 
+[![Travis build status](https://travis-ci.org/iondrimba/rename-me.svg?branch=master)](https://travis-ci.org/iondrimba/rename-me)
 
 ####GOAL
 

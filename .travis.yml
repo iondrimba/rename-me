@@ -1,0 +1,13 @@
+sudo: required
+language: node_js
+node_js:
+- '4.2.2'
+before_install:
+- npm install -g npm
+before_script:
+- npm install -g gulp
+script:
+- gulp
+- gulp bump-patch
+- gulp bump-minor
+- gulp bump-major
