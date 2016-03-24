@@ -6,15 +6,25 @@ var semver = require('semver');
 var pckg = require('./package.json');
 
 
-gulp.task('bump', function() {
-    var newVer = semver.inc(pckg.version, 'patch');
-    return gulp.src(['./package.json'])
-        .pipe(bump({
-            version: newVer
-        }))
-        .pipe(gulp.dest('./'));
+function bumpVersion(type) {
+	var newVer = semver.inc(pckg.version, type);
+	return gulp.src(['./package.json'])
+		.pipe(bump({
+			version: newVer
+		}))
+		.pipe(gulp.dest('./'));
+}
+
+gulp.task('bump-patch', function () {
+	return bumpVersion('patch');
+});
+gulp.task('bump-minor', function () {
+	return bumpVersion('minor');
+});
+gulp.task('bump-major', function () {
+	return bumpVersion('major');
 });
 
-gulp.task('default', function() {
-    gulp.run('bump');
+gulp.task('default', function () {
+	gulp.run('bump-patch');
 });

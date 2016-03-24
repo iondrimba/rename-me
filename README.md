@@ -18,6 +18,9 @@ Rename files with version tag to optimize cache
 * Write tests
 * Develop a Gulp plugin for easy integration
 
+####TARGET PROJECT
+This package is meant to be used with Single Page Applications
+
 ####Usage via terminal
 
 Inside the terminal type:
@@ -60,7 +63,7 @@ Read the package.json file and store it as an object
 ```js
 var pckg = require('./package.json');
 ```
-Bump the package.json version tag it using semver lib
+Bump the package.json version tag using semver lib
 ```js
 var patch = semver.inc(pckg.version, 'patch');
 var minor = semver.inc(pckg.version, 'minor');
@@ -92,4 +95,36 @@ gulp.task('minor', function () {
 gulp.task('major', function () {
 	return bumpPackageJson(major);
 });
+```
+Define the function that will receive the bumped version tag and update the files
+```js
+function bumpAppFiles(version) {
+	var options = {};
+	options.version = version;
+	options.indexFile = './public/index.html';
+
+	options.filePath = ['./public/js/app.js', './public/css/app.css'];
+	options.outputfolder = ['./public/js/', './public/css/'];
+
+	renameMe(options);
+}
+```
+Define the final task for each bump version type 
+```js
+gulp.task('bump-patch', ['patch'], function renamePatch() {
+	bumpAppFiles(patch);
+});
+
+gulp.task('bump-minor', ['minor'], function renameMinor() {
+	bumpAppFiles(minor);
+});
+
+gulp.task('bump-major', ['major'], function renameMajor() {
+	bumpAppFiles(major);
+});
+```
+
+Finally you should run the rename task manually as the last task, do not chain it with other tasks.
+```js
+npm gulp bump-patch
 ```
