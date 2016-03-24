@@ -8,6 +8,7 @@ Rename files with version tag to optimize cache
 2. Avoid cache invalidation via query string ie: path/file.js?hash=#####
 3. Rename a file based on a version suplied as parameter and change its reference inside the html file.
 
+
 ####INSTALL
 
 ```sh
