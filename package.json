@@ -1,7 +1,7 @@
 {
   "name": "rename-me",
-  "version": "0.1.1",
-  "description": "(not ready to use) Rename files with version tag to optimize cache",
+  "version": "1.0.0",
+  "description": "Rename files with version tag to optimize cache",
   "main": "rename-me.js",
   "scripts": {
     "test": "npm test"
