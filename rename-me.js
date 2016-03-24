@@ -15,7 +15,7 @@ var fileNames = [],
     filesRenamed = [],
     finalOutputPaths = [];
 
-var renameMe = function (options) {
+var renameMe = function(options) {
 
     filePath = options.filePath;
     version = options.version;
@@ -41,7 +41,7 @@ var renameMe = function (options) {
             extension: fileExtensions
         });
 
-        outputfolder.forEach(function (folder, index) {
+        outputfolder.forEach(function(folder, index) {
             finalOutputPaths.push(folder + filesRenamed[index]);
         });
     }
@@ -49,7 +49,8 @@ var renameMe = function (options) {
 
     function rename() {
         //rename source files and move them to the destination folder
-        filePath.forEach(function (path, index) {
+
+        filePath.forEach(function(path, index) {
             fs.createReadStream(path)
                 .pipe(fs.createWriteStream(finalOutputPaths[index]));
         });
@@ -57,7 +58,7 @@ var renameMe = function (options) {
 
     function removePathFromFileName(files) {
         var output = [];
-        files.forEach(function (name) {
+        files.forEach(function(name) {
             var filename = name.replace(/.+([^\/])\//g, '');
             //src/js/hello.js -> hello.js
             output.push(filename);
@@ -67,7 +68,7 @@ var renameMe = function (options) {
 
     function getFileExtension(files) {
         var output = [];
-        files.forEach(function (name) {
+        files.forEach(function(name) {
             var filename = name.replace(/[0-9a-z-0-1]{1,}/, '');
 
             //hello.js -> .js
@@ -78,7 +79,7 @@ var renameMe = function (options) {
 
     function getFileNameWithoutExtension(files) {
         var output = [];
-        files.forEach(function (name) {
+        files.forEach(function(name) {
             var filename = name.replace(/[0-9a-z]+$/, '');
 
             // hello.js -> hello.
@@ -92,19 +93,19 @@ var renameMe = function (options) {
         var regex = new RegExp(fileNames, "g");
 
         //read the main file (index.html)
-        fs.readFile(indexFile, 'utf8', function (err, data) {
+        fs.readFile(indexFile, 'utf8', function(err, data) {
             if (err) {
                 return console.log(err);
             }
 
             //replace references inside the main file (index.html)
-            fileNames.forEach(function (name, index) {
+            fileNames.forEach(function(name, index) {
                 regex = new RegExp(name, "g");
                 contents = contents.replace(regex, newNames[index]);
             });
 
             //write the main file (index.html) with the new references
-            fs.writeFile(indexFile, contents, 'utf8', function (err) {
+            fs.writeFile(indexFile, contents, 'utf8', function(err) {
                 if (err) return console.log(err);
             });
         });
@@ -112,7 +113,7 @@ var renameMe = function (options) {
 
     function concatNamedVersion(options) {
         var output = [];
-        options.name.forEach(function (name, index) {
+        options.name.forEach(function(name, index) {
             var filename = name.replace(/[0-9a-z]+$/, '');
 
             // hello.js -> hello.version.js (hello.1.2.0.js)
