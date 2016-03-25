@@ -4,7 +4,7 @@
   "description": "Rename files with version tag to optimize cache",
   "main": "rename-me.js",
   "scripts": {
-    "test": "node jasmine-runner.js"
+    "test": "istanbul cover --include-all-sources jasmine-runner.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/iondrimba/rename-me#readme",
   "dependencies": {
+    "istanbul": "^0.4.2",
+    "jasmine-node": "^1.14.5",
     "semver": "^5.1.0"
   },
   "devDependencies": {
