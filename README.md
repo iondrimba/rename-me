@@ -37,7 +37,7 @@ Inside the terminal type:
 #####Real world:
 
 ```sh
- node .node_modules/rename-me/rename-me public/js/app.js 1.0.1 public/js/ public/index.html
+ node ./node_modules/rename-me/rename-me public/js/app.js 1.0.1 public/js/ public/index.html
 ```
 
 #####Multiple files
@@ -45,7 +45,7 @@ Inside the terminal type:
 * multiple parameters are passed inside quotes and comma separeted 'param1', 'param2'
 
 ```sh
- node .node_modules/rename-me/rename-me 'public/js/app.js','public/css/app.css' 1.0.1 'public/js/','public/css/' public/index.html
+ node ./node_modules/rename-me/rename-me 'public/js/app.js','public/css/app.css' 1.0.1 'public/js/','public/css/' public/index.html
 ```
 
 ####Using with Gulp (workaround)
