@@ -1,57 +1,96 @@
 var renameMe = require('../rename-me');
 var fs = require('fs');
-var version = '0.0.1';
+var fse = require('fs-extra');
+var version = '0.0.' + new Date().getSeconds();
+var del = require('del');
+
 
 describe('RenameMe Tests', function() {
 
-	it('Lib should be defined ', function() {
-		expect(renameMe).toBeDefined();
-	});
+    function getJSSingleFileParameters() {
+        var options = {};
+        options.version = version;
+        options.indexFile = './public/index.html';
+        options.filePath = ['./public/js/app.js'];
+        options.outputfolder = ['./public/js/'];
+        return options;
+    }
 
-	it('Should rename JS file with version tag ' + version, function() {
-		var result = false;
-		var options = {};
-		options.version = version;
-		options.indexFile = './public/index.html';
-		options.filePath = ['./public/js/app.js', './public/css/app.css'];
-		options.outputfolder = ['./public/js/', './public/css/'];
+    function getCSSingleFileParameters() {
+        var options = {};
+        options.version = version;
+        options.indexFile = './public/index.html';
+        options.filePath = ['./public/css/app.css'];
+        options.outputfolder = ['./public/css/'];
+        return options;
+    }
 
-		renameMe(options);
+    beforeEach(function() {        
+        var js = fs.readFileSync('src/app.js');
+        fs.writeFileSync('public/js/app.js', js, 'utf8');
 
-		var bumpedFile = './public/js/app.' + version + '.js';
-		var data = fs.readFile(bumpedFile, 'utf8', function() {
-			if (err) throw err;
-			result = true;
-			console.log('js done');
+        var css = fs.readFileSync('src/app.css');
+        fs.writeFileSync('public/css/app.css', css, 'utf8');
 
-			asyncSpecDone();
-		});
+        var html = fs.readFileSync('src/index.html');
+        fs.writeFileSync('public/index.html', html, 'utf8');
+    });
 
-		expect(result).toBe(true);
-		asyncSpecWait();
-	});
+    afterEach(function() {        
+        del.sync(['public/js/**', '!public', '!public/js' ]);
+        del.sync(['public/css/**', '!public','!public/css']);
+    });    
 
-	it('Should rename CSS file with version tag ' + version, function() {
-		var result = false;
-		var options = {};
-		options.version = version;
-		options.indexFile = './public/index.html';
-		options.filePath = ['./public/js/app.js', './public/css/app.css'];
-		options.outputfolder = ['./public/js/', './public/css/'];
+    it('Lib should be defined ', function() {
+        expect(renameMe).toBeDefined();
+    });
 
-		renameMe(options);
 
-		var bumpedFile = './public/css/app.' + version + '.css';
-		var data = fs.readFile(bumpedFile, 'utf8', function() {
-			if (err) throw err;
-			result = true;
-			console.log('css done');
-			asyncSpecDone();
-		});
+    it('Should create CSS file with version tag ' + version, function() {
+        var result = false;
+        var options = getCSSingleFileParameters();
 
-		expect(result).toBe(true);
-		asyncSpecWait();
+        renameMe(options);
 
-	});
+        var bumpedFile = './public/css/app.' + version + '.css';
+        var content = fs.readFileSync(bumpedFile, 'utf8');
+        result = (content.length > 0);
+        expect(result).toBe(true);
+    });
+
+    it('Should create JS file with version tag ' + version, function() {
+        var result = false;
+        var options = getJSSingleFileParameters();
+
+        renameMe(options);
+
+        var bumpedFile = './public/js/app.' + version + '.js';
+        var content = fs.readFileSync(bumpedFile, 'utf8');
+        result = (content.length > 0);
+        expect(result).toBe(true);
+    });
+
+
+    it('Should change the reference of CSS path with version ' + version + ' inside the html file', function() {
+        var result = false;
+        var options = getCSSingleFileParameters();
+
+        renameMe(options);
+
+        var content = fs.readFileSync(options.indexFile, 'utf8');
+        result = (content.indexOf('app.' + version + '.css') > -1);
+        expect(result).toBe(true);
+    });
+
+    it('Should change the reference of JS path with version ' + version + ' inside the html file', function() {
+        var result = false;
+        var options = getJSSingleFileParameters();
+
+        renameMe(options);
+
+        var content = fs.readFileSync(options.indexFile, 'utf8');
+        result = (content.indexOf('app.' + version + '.js') > -1);
+        expect(result).toBe(true);
+    });
 
 });

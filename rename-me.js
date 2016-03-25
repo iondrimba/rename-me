@@ -2,58 +2,51 @@
 //node >  rename-me file version outputpath index.html
 //demo > node rename-me src/app.js 1.1.1 public/js public/index.html
 //output > public/app.1.1.1.js
-
-var fs = require('fs');
-var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
-var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
-var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
-var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
-
-var fileNames = [],
-    fileExtensions = [],
-    tempNameNoExtension = [],
-    filesRenamed = [],
-    finalOutputPaths = [];
+var fs = require('fs'); 
 
 var renameMe = function(options) {
+    
+    this.filePaths = options.filePath;
+    this.version = options.version;
+    this.outputfolder = options.outputfolder;
+    this.indexFile = options.indexFile;
 
-    filePath = options.filePath;
-    version = options.version;
-    outputfolder = options.outputfolder;
-    indexFile = options.indexFile;
+    this.fileNames = [];
+    this.fileExtensions = [];
+    this.tempNameNoExtension = [];
+    this.filesRenamed = [];
+    this.finalOutputPaths = [];    
 
     try {
         setup();
-        rename();
-        replaceReferences(filesRenamed);
+        rename(this.filePaths, this.finalOutputPaths);
+        replaceReferences(this.fileNames,this.filesRenamed, this.indexFile);
     } catch (ex) {
         console.log('ex:', ex.message);
     }
 
     function setup() {
-        fileNames = removePathFromFileName(filePath);
-        fileExtensions = getFileExtension(fileNames);
-        tempNameNoExtension = getFileNameWithoutExtension(fileNames);
+        this.fileNames = removePathFromFileName(this.filePaths);
+        this.fileExtensions = getFileExtension(this.fileNames);
+        this.tempNameNoExtension = getFileNameWithoutExtension(this.fileNames);
 
-        filesRenamed = concatNamedVersion({
-            name: tempNameNoExtension,
-            version: version,
-            extension: fileExtensions
+        this.filesRenamed = concatNamedVersion({
+            name: this.tempNameNoExtension,
+            version: this.version,
+            extension: this.fileExtensions
         });
 
-        outputfolder.forEach(function(folder, index) {
-            finalOutputPaths.push(folder + filesRenamed[index]);
-        });
+        this.outputfolder.forEach(function(folder, index) {
+            this.finalOutputPaths.push(folder + this.filesRenamed[index]);
+        }.bind(this));
     }
 
-
-    function rename() {
+    function rename(filePaths, finalOutputPaths) {
         //rename source files and move them to the destination folder
-
-        filePath.forEach(function(path, index) {
-            fs.createReadStream(path)
-                .pipe(fs.createWriteStream(finalOutputPaths[index]));
-        });
+        filePaths.forEach(function(path, index) {
+            var content = fs.readFileSync(path);                    
+            fs.writeFileSync(finalOutputPaths[index], content);  
+        }.bind(this));
     };
 
     function removePathFromFileName(files) {
@@ -88,27 +81,15 @@ var renameMe = function(options) {
         return output;
     };
 
-    function replaceReferences(newNames) {
+    function replaceReferences(fileNames, newNames, indexFile) {
         var contents = fs.readFileSync(indexFile, 'utf8');
-        var regex = new RegExp(fileNames, "g");
-
-        //read the main file (index.html)
-        fs.readFile(indexFile, 'utf8', function(err, data) {
-            if (err) {
-                return console.log(err);
-            }
-
-            //replace references inside the main file (index.html)
-            fileNames.forEach(function(name, index) {
-                regex = new RegExp(name, "g");
-                contents = contents.replace(regex, newNames[index]);
-            });
-
-            //write the main file (index.html) with the new references
-            fs.writeFile(indexFile, contents, 'utf8', function(err) {
-                if (err) return console.log(err);
-            });
-        });
+        var regex = new RegExp(fileNames, "g");                    
+        //replace references inside the main file (index.html)
+        fileNames.forEach(function(name, index) {
+            regex = new RegExp(name, "g");           
+            contents = contents.replace(regex, newNames[index]);
+        });        
+        fs.writeFileSync(indexFile, contents, 'utf8');       
     };
 
     function concatNamedVersion(options) {
@@ -125,6 +106,14 @@ var renameMe = function(options) {
 
 //executed if called manually via terminal
 if (process.argv.length > 3) {
+
+    var fs = require('fs');
+    var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
+    var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
+    var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
+    var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
+
+
     var options = {};
     options.filePath = filePath.split(',');;
     options.version = version;

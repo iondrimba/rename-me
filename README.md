@@ -15,9 +15,9 @@ Rename files with version tag to optimize cache
 ```sh
  npm install rename-me --save-dev
 ```
+
 ####TODO
 
-* Write tests
 * Develop a Gulp plugin for easy integration
 
 ####TARGET PROJECT
