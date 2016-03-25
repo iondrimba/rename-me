@@ -30,9 +30,6 @@ describe('RenameMe Tests', function() {
 
         var css = fs.readFileSync('src/app.css');
         fs.writeFileSync('public/css/app.css', css, 'utf8');
-
-        var html = fs.readFileSync('src/index.html');
-        fs.writeFileSync('public/index.html', html, 'utf8');
     });
 
     afterEach(function() {        

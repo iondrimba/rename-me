@@ -83,11 +83,13 @@ var renameMe = function(options) {
 
     function replaceReferences(fileNames, newNames, indexFile) {
         var contents = fs.readFileSync(indexFile, 'utf8');
-        var regex = new RegExp(fileNames, "g");                    
+
         //replace references inside the main file (index.html)
         fileNames.forEach(function(name, index) {
-            regex = new RegExp(name, "g");           
-            contents = contents.replace(regex, newNames[index]);
+            var splited = name.split('.');
+            var pattern = splited[0] + '[.0-9.]{1,}' + splited[1];
+            var regex = new RegExp(pattern, "i");            
+            contents = contents.replace(regex, newNames[index]);            
         });        
         fs.writeFileSync(indexFile, contents, 'utf8');       
     };
