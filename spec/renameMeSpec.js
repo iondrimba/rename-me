@@ -1,6 +1,5 @@
 var renameMe = require('../rename-me');
 var fs = require('fs');
-var fse = require('fs-extra');
 var version = '0.0.' + new Date().getSeconds();
 var del = require('del');
 
