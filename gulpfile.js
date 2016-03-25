@@ -4,6 +4,7 @@ var bump = require('gulp-bump');
 var fs = require('fs');
 var semver = require('semver');
 var pckg = require('./package.json');
+var coveralls = require('gulp-coveralls');
 
 
 function bumpVersion(type) {
@@ -27,4 +28,9 @@ gulp.task('bump-major', function () {
 
 gulp.task('default', function () {
 	gulp.run('bump-patch');
+});
+
+gulp.task('coveralls', function () {
+    gulp.src('./coverage/lcov.info')
+        .pipe(coveralls());
 });
