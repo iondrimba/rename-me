@@ -3,8 +3,8 @@
   "version": "1.0.2",
   "description": "Rename files with version tag to optimize cache",
   "main": "rename-me.js",
-  "scripts": {
-    "test": "istanbul cover rename-me.js jasmine-runner.js"
+  "scripts": {    
+    "test": "istanbul cover jasmine-runner.js"
   },
   "repository": {
     "type": "git",
@@ -33,11 +33,12 @@
     "gulp": "^3.9.1",
     "gulp-bump": "^2.0.1",
     "gulp-coveralls": "^0.1.4",
+    "gulp-istanbul": "^0.10.3",
+    "istanbul": "^0.4.2",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
+    "jasmine-node": "^1.14.5",
     "jasmine-reporters": "^2.1.1",
-    "jasmine-spec-reporter": "^2.4.0",
-    "istanbul": "^0.4.2",
-    "jasmine-node": "^1.14.5"
+    "jasmine-spec-reporter": "^2.4.0"
   }
 }

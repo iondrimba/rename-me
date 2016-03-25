@@ -6,7 +6,6 @@ var semver = require('semver');
 var pckg = require('./package.json');
 var coveralls = require('gulp-coveralls');
 
-
 function bumpVersion(type) {
 	var newVer = semver.inc(pckg.version, type);
 	return gulp.src(['./package.json'])
