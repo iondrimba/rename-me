@@ -128,6 +128,6 @@ gulp.task('bump-major', ['major'], function renameMajor() {
 ```
 
 Finally you should run the rename task manually as the last task, do not chain it with other tasks.
-```js
-npm gulp bump-patch
+```sh
+gulp bump-patch
 ```
