@@ -1,7 +1,7 @@
 # rename-me
 Rename files with version tag to optimize cache
 
-[![Travis build status](https://travis-ci.org/iondrimba/rename-me.svg?branch=master)](https://travis-ci.org/iondrimba/rename-me) [![Coverage Status](https://coveralls.io/repos/iondrimba/rename-me/badge.svg?branch=master&service=github)](https://coveralls.io/github/iondrimba/nojquery?branch=master)
+[![Travis build status](https://travis-ci.org/iondrimba/rename-me.svg?branch=master)](https://travis-ci.org/iondrimba/rename-me) [![Coverage Status](https://coveralls.io/repos/iondrimba/rename-me/badge.svg?branch=master&service=github)](https://coveralls.io/github/iondrimba/rename-me?branch=master)
 
 
 ####GOAL
