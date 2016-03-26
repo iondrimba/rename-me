@@ -23,4 +23,4 @@ after_test:
 matrix:
   fast_finish: true
 cache:
-  - node_modules -> package.j
+  - node_modules -> package.json
