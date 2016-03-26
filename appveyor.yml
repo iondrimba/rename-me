@@ -1,5 +1,6 @@
 # Test against this version of Node.js
 environment:
+    CI:TRUE 
 nodejs_version: "4.2.2"
 
 # Install scripts. (runs after repo cloning)
