@@ -19,10 +19,10 @@ test_script:
   # filed against Grunt. https://github.com/joyent/node/issues/3584
   - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
   - cmd: npm test
-  - cmd: - gulp coveralls
-  - cmd: - gulp bump-patch
-  - cmd: - gulp bump-minor
-  - cmd: - gulp bump-major
+  - cmd: gulp coveralls
+  - cmd: gulp bump-patch
+  - cmd: gulp bump-minor
+  - cmd: gulp bump-major
 build: off
 matrix:
   fast_finish: true
