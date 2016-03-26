@@ -18,11 +18,11 @@ test_script:
   # We test multiple Windows shells because of prior stdout buffering issues
   # filed against Grunt. https://github.com/joyent/node/issues/3584
   - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
-  - cmd: npm test
-  - cmd: gulp coveralls
-  - cmd: gulp bump-patch
-  - cmd: gulp bump-minor
-  - cmd: gulp bump-major
+  - npm test
+  - gulp coveralls
+  - gulp bump-patch
+  - gulp bump-minor
+  - gulp bump-major
 build: off
 matrix:
   fast_finish: true
