@@ -18,7 +18,7 @@ test_script:
   - gulp bump-patch
   - gulp bump-minor
   - gulp bump-major
-after_script:
+after_test:
   - gulp coveralls
 matrix:
   fast_finish: true
