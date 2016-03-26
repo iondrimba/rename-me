@@ -1,24 +1,30 @@
-# Test against this version of Node.js
+init:
+  - git config --global core.autocrlf true
+# What combinations to test
 environment:
-    CI:TRUE 
-nodejs_version: "4.2.2"
-
-# Install scripts. (runs after repo cloning)
+  matrix:
+    - nodejs_version: "4.2.2"
+platform:
+  - x86
+  - x64
 install:
-# Get the latest stable version of Node.js or io.js
-- ps: Install-Product node $env:nodejs_version
-# install modules
-- npm install -g
-- npm install -g gulp
-
-# Post-install test scripts.
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm
+  - npm install
+  - npm install gulp -g
 test_script:
-# Output useful info for debugging.
-- node --version
-- npm --version
-# run tests
-- npm test
-- gulp coveralls
-- gulp bump-patch
-- gulp bump-minor
-- gulp bump-major
+  # Output useful info for debugging.
+  - node --version && npm --version
+  # We test multiple Windows shells because of prior stdout buffering issues
+  # filed against Grunt. https://github.com/joyent/node/issues/3584
+  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
+  - cmd: npm test
+  - cmd: - gulp coveralls
+  - cmd: - gulp bump-patch
+  - cmd: - gulp bump-minor
+  - cmd: - gulp bump-major
+build: off
+matrix:
+  fast_finish: true
+cache:
+  - node_modules -> package.j
