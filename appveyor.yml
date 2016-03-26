@@ -20,6 +20,10 @@ test_script:
   - npm test
   - gulp bump-patch
   - gulp bump-minor
-  - gulp bump-major  
-after_test:
-  - gulp coveralls
+  - gulp bump-major
+test_script:
+- gulp coveralls
+matrix:
+  fast_finish: true
+cache:
+  - node_modules -> package.j
