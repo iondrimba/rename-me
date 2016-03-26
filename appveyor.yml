@@ -4,9 +4,6 @@ init:
 environment:
   matrix:
     - nodejs_version: "4.2.2"
-platform:
-  - x86
-  - x64
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install -g npm
@@ -22,7 +19,7 @@ test_script:
   - gulp bump-minor
   - gulp bump-major
 after_script:
-- gulp coveralls
+  - gulp coveralls
 matrix:
   fast_finish: true
 cache:
