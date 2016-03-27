@@ -24,6 +24,15 @@ describe('RenameMe Tests', function() {
         return options;
     }
 
+    function getMultipleFileParameters() {
+        var options = {};
+        options.version = version;
+        options.indexFile = './public/index.html';
+        options.filePath = ['./public/js/app.js', './public/css/app.css'];
+        options.outputfolder = ['./public/js/', './public/css/'];
+        return options;
+    }
+
     beforeEach(function() {        
         var js = fs.readFileSync('src/app.js');
         fs.writeFileSync('public/js/app.js', js, 'utf8');
@@ -89,4 +98,36 @@ describe('RenameMe Tests', function() {
         expect(result).toBe(true);
     });
 
+    it('Should create both JS and CSS files with version tag ' + version, function() {
+        var resultCSS = false;
+        var resultJS = false;
+        var options = getMultipleFileParameters();
+
+        renameMe(options);
+
+        var bumpedFileCSS = './public/css/app.' + version + '.css';
+        content = fs.readFileSync(bumpedFileCSS, 'utf8');
+        resultCSS = (content.length > 0);
+
+        var bumpedFileJS = './public/js/app.' + version + '.js';
+        content = fs.readFileSync(bumpedFileJS, 'utf8');
+        resultJS = (content.length > 0);
+        
+        expect(resultJS).toBe(true);
+    });
+
+    it('Should change the reference of both JS and CSS with version tag ' + version + ' inside the html file', function() {
+        var resultJS = false;
+        var resultCSS = false;
+        var options = getMultipleFileParameters();
+
+        renameMe(options);
+
+        var content = fs.readFileSync(options.indexFile, 'utf8');
+        resultJS = (content.indexOf('app.' + version + '.js') > -1);
+
+        content = fs.readFileSync(options.indexFile, 'utf8');
+        resultCSS = (content.indexOf('app.' + version + '.css') > -1);
+        expect(resultCSS).toBe(true);
+    });    
 });

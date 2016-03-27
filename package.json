@@ -1,6 +1,6 @@
 {
   "name": "rename-me",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Rename files with version tag to optimize cache",
   "main": "rename-me.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "versioning",
     "spa"
   ],
-  "author": "Ion D. Filho",
+  "author": "Ion D. Filho <iondrimba@gmail.com> (https://iondrimbafilho.me/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/iondrimba/rename-me/issues"

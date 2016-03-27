@@ -20,7 +20,8 @@ var renameMe = function(options) {
     try {
         setup();
         rename(this.filePaths, this.finalOutputPaths);
-        replaceReferences(this.fileNames,this.filesRenamed, this.indexFile);
+        replaceReferences(this.fileNames, this.filesRenamed, this.indexFile);
+        console.log('>> Complete');
     } catch (ex) {
         console.log('ex:', ex.message);
     }
@@ -39,6 +40,7 @@ var renameMe = function(options) {
         this.outputfolder.forEach(function(folder, index) {
             this.finalOutputPaths.push(folder + this.filesRenamed[index]);
         }.bind(this));
+        console.log('>> Setup complete');
     }
 
     function rename(filePaths, finalOutputPaths) {
@@ -47,6 +49,7 @@ var renameMe = function(options) {
             var content = fs.readFileSync(path);                    
             fs.writeFileSync(finalOutputPaths[index], content);  
         }.bind(this));
+        console.log('>> Rename files complete');
     };
 
     function removePathFromFileName(files) {
@@ -91,7 +94,8 @@ var renameMe = function(options) {
             var regex = new RegExp(pattern, "i");            
             contents = contents.replace(regex, newNames[index]);            
         });        
-        fs.writeFileSync(indexFile, contents, 'utf8');       
+        fs.writeFileSync(indexFile, contents, 'utf8');
+        console.log('>> Replace html references complete');
     };
 
     function concatNamedVersion(options) {
