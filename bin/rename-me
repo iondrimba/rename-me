@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+var renameMe = require("../rename-me.js");
+var program = require('commander');
+
+program
+  .version(require('../package.json').version)
+  .usage('rename-me file-path-to-rename.js version-number destination/ index.html')
+  .on('--help', function(){
+    console.log('  Examples:');
+    console.log('');
+    console.log('    $ rename-me public/js/app.js 1.0.1 public/js/ public/index.html');
+    console.log('');
+  })
+  .parse(process.argv);
+
+if (process.argv.length > 2) {
+
+    var fs = require('fs');
+    var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
+    var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
+    var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
+    var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
+
+
+    var options = {};
+    options.filePath = filePath.split(',');;
+    options.version = version;
+    options.outputfolder = outputfolder.split(',');;
+    options.indexFile = indexFile;
+    renameMe(options);
+}

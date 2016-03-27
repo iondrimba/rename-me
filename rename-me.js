@@ -106,22 +106,4 @@ var renameMe = function(options) {
     };
 }
 
-//executed if called manually via terminal
-if (process.argv.length > 3) {
-
-    var fs = require('fs');
-    var filePath = process.argv[2]; //SOURCE FILE PATH ex: Desktop/excel.xlsx;
-    var version = process.argv[3]; //OUTPUT PATH ex: 1.2.3 - could be anything'
-    var outputfolder = process.argv[4]; //OUTPUT PATH ex: Desktop/'
-    var indexFile = process.argv[5]; //INDEX FILE TO REPLACE REFERNCES OF OLD FILE'
-
-
-    var options = {};
-    options.filePath = filePath.split(',');;
-    options.version = version;
-    options.outputfolder = outputfolder.split(',');;
-    options.indexFile = indexFile;
-    renameMe(options);
-}
-
 module.exports = renameMe;
