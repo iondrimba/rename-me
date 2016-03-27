@@ -1,6 +1,6 @@
 {
   "name": "rename-me",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Rename files with version tag to optimize cache",
   "main": "rename-me.js",
   "scripts": {
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/iondrimba/rename-me#readme",
   "dependencies": {
+    "commander": "^2.9.0",
     "semver": "^5.1.0"
   },
   "devDependencies": {
