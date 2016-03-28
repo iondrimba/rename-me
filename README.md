@@ -2,7 +2,7 @@
 Rename files with version tag to optimize cache
 
 [![Travis build status](https://travis-ci.org/iondrimba/rename-me.svg?branch=master)](https://travis-ci.org/iondrimba/rename-me) 
-[![Build Status: Windows](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva/branch/master?svg=true)](https://ci.appveyor.com/project/iondrimba/rename-me/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/cy55s287bw86y3m1?svg=true)](https://ci.appveyor.com/project/iondrimba/rename-me)
 [![Coverage Status](https://coveralls.io/repos/github/iondrimba/rename-me/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/rename-me?branch=master)
 
 
