@@ -33,7 +33,7 @@ describe('RenameMe Tests', function() {
         return options;
     }
 
-    beforeEach(function() {        
+    beforeEach(function() {
         var js = fs.readFileSync('src/app.js');
         fs.writeFileSync('public/js/app.js', js, 'utf8');
 
@@ -41,10 +41,10 @@ describe('RenameMe Tests', function() {
         fs.writeFileSync('public/css/app.css', css, 'utf8');
     });
 
-    afterEach(function() {        
-        del.sync(['public/js/**', '!public', '!public/js' ]);
-        del.sync(['public/css/**', '!public','!public/css']);
-    });    
+    afterEach(function() {
+        del.sync(['public/js/**', '!public', '!public/js']);
+        del.sync(['public/css/**', '!public', '!public/css']);
+    });
 
     it('Lib should be defined ', function() {
         expect(renameMe).toBeDefined();
@@ -112,9 +112,21 @@ describe('RenameMe Tests', function() {
         var bumpedFileJS = './public/js/app.' + version + '.js';
         content = fs.readFileSync(bumpedFileJS, 'utf8');
         resultJS = (content.length > 0);
-        
+
+        expect(resultCSS).toBe(true);
         expect(resultJS).toBe(true);
     });
+
+    it('Should throw exception', function() {
+        expect(function() {
+            var result = false;
+            var options = {};
+
+            renameMe(options);
+
+        }).toThrow();
+    });
+
 
     it('Should change the reference of both JS and CSS with version tag ' + version + ' inside the html file', function() {
         var resultJS = false;
@@ -128,6 +140,8 @@ describe('RenameMe Tests', function() {
 
         content = fs.readFileSync(options.indexFile, 'utf8');
         resultCSS = (content.indexOf('app.' + version + '.css') > -1);
+
         expect(resultCSS).toBe(true);
-    });    
+        expect(resultJS).toBe(true);
+    });
 });

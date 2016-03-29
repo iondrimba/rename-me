@@ -23,7 +23,7 @@ var renameMe = function(options) {
         replaceReferences(this.fileNames, this.filesRenamed, this.indexFile);
         console.log('>> Complete');
     } catch (ex) {
-        console.log('ex:', ex.message);
+        throw new Error('find:: ' + ex.message);
     }
 
     function setup() {
