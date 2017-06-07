@@ -36,7 +36,7 @@ Inside the terminal type:
 rename-me file-path-to-rename.js version-number destination/ index.html
 ```
 
-#####Real world:
+##### Real world:
 
 ```sh
 rename-me public/js/app.js 1.0.1 public/js/ public/index.html
