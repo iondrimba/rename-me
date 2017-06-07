@@ -6,27 +6,27 @@ Rename files with version tag to optimize cache
 [![Coverage Status](https://coveralls.io/repos/github/iondrimba/rename-me/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/rename-me?branch=master)
 
 
-####GOAL
+#### GOAL
 
 1. Avoid caching build files when they are modified.
 2. Avoid cache invalidation via query string ie: path/file.js?hash=#####
 3. Rename a file based on a version suplied as parameter and change its reference inside the html file.
 
 
-####INSTALL
+#### INSTALL
 
 ```sh
  npm install rename-me -g
 ```
 
-####TODO
+#### TODO
 
 * Develop a Gulp plugin for easy integration
 
-####TARGET PROJECT
+#### TARGET PROJECT
 This package is meant to be used with Single Page Applications
 
-####Usage via terminal
+#### Usage via terminal
 
 Inside the terminal type:
 
@@ -42,7 +42,7 @@ rename-me file-path-to-rename.js version-number destination/ index.html
 rename-me public/js/app.js 1.0.1 public/js/ public/index.html
 ```
 
-#####Multiple files
+##### Multiple files
 
 * multiple parameters are passed inside quotes and comma separeted 'param1', 'param2'
 
@@ -50,7 +50,7 @@ rename-me public/js/app.js 1.0.1 public/js/ public/index.html
 rename-me 'public/js/app.js','public/css/app.css' 1.0.1 'public/js/','public/css/' public/index.html
 ```
 
-####Using with Gulp (workaround)
+#### Using with Gulp (workaround)
 
 Install these dependencies
 ```sh
