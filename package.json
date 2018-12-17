@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "commander": "^2.9.0",
-    "del": "^2.2.0",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.0.1",
     "gulp-coveralls": "^0.1.4",
